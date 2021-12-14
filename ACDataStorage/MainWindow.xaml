@@ -1,0 +1,34 @@
+﻿<Window x:Class="ACDataStorage.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:ACDataStorage"
+        mc:Ignorable="d"
+        Title="ACDataStorage" Height="500" Width="400" Icon="Images/accomp.jpg">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Image x:Name="Lable" Source="Images/accomp.jpg" Grid.Row="0" HorizontalAlignment="Center"/>
+        <StackPanel Grid.Row="1">
+            <Label Content="Authorization" Margin="0,20" FontSize="25" VerticalAlignment="Top" HorizontalAlignment="Center" />
+            <TextBox x:Name="NameBox"
+                     materialDesign:HintAssist.Hint="Name"
+                     HorizontalAlignment="Center" Width="200"
+                     materialDesign:HintAssist.HelperText="Enter your name"/>
+            <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Center" Width="200" Margin="0,60"
+                     materialDesign:HintAssist.Hint="Password"
+                     materialDesign:TextFieldAssist.HasClearButton="True"
+                     materialDesign:HintAssist.HelperText="Enter your password" />
+            <Button x:Name="buttonEnter" Click="buttonEnter_Click"  
+  Style="{StaticResource MaterialDesignOutlinedLightButton}"
+  ToolTip="Вход"
+  Content="ENTER"
+  Width="100" Height="30"
+  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -59,16 +59,34 @@
           HorizontalAlignment="Stretch" />
                     </StackPanel>
                 </TabItem.Header>
-                <TextBlock>
-      <Run
-        Text="tab 2 content. Default look and behaviors." />
-      <LineBreak />
-      <LineBreak />
-      <Run
-        FontStyle="Italic">
-      Praesent sed dui arcu. Vivamus porta auctor sagittis
-    </Run>
-                </TextBlock>
+                <StackPanel>
+                    <ToolBarTray>
+                        <ToolBar
+    Style="{DynamicResource MaterialDesignToolBar}"
+    ClipToBounds="False" HorizontalAlignment="Left" Width="700">
+                            <Separator />
+                            <Button
+      ToolTip="Добавить заказ"
+      Click="AddOrderButton"
+      Content="{materialDesign:PackIcon Kind=PackageVariantClosedPlus}" />
+                            <Separator />
+                            <Button
+      ToolTip="Изменить заказ"
+      Click="ChangeOrderButton"
+      Content="{materialDesign:PackIcon Kind=ArchiveCogOutline}" />
+                            <Separator />
+                            <Button
+      ToolTip="Удалить заказ"
+      Content="{materialDesign:PackIcon Kind=ArchiveOffOutline}" />
+                            <Separator />
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="ПОИСК" />
+                            <TextBox x:Name="TexBoxSearch" Width="300" 
+        ToolTip="Поиск по таблице">
+                            </TextBox>
+                            <Separator />
+                        </ToolBar>
+                    </ToolBarTray>
+                </StackPanel>
             </TabItem>
             <TabItem >
                 <TabItem.Header>

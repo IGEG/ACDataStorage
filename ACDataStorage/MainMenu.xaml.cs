@@ -23,5 +23,15 @@ namespace ACDataStorage
         {
             InitializeComponent();
         }
+
+        private void AddOrderButton(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ChangeOrderButton(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

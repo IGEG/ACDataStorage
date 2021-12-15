@@ -88,7 +88,7 @@
                         </ToolBar>
                     </ToolBarTray>
                     <DataGrid local:DataGridTextSearch.SearchValue="{Binding ElementName=TexBoxSearch, Path=Text, UpdateSourceTrigger=PropertyChanged}"
-            CanUserAddRows="False" SelectionMode="Extended" Grid.Row="3" x:Name="DataGridOrders" AutoGenerateColumns="False" ItemsSource="{Binding}" Margin="20,0,20,20">
+             IsReadOnly="True"  SelectionMode="Extended" Grid.Row="3" x:Name="DataGridOrders" AutoGenerateColumns="False" ItemsSource="{Binding}" Margin="20,0,20,20">
                         <DataGrid.Resources>
                             <local:SearchValueConverter x:Key="SearchValueConverter" />
                             <Style TargetType="{x:Type DataGridCell}">

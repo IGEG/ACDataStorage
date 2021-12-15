@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ACDataStorage"
         mc:Ignorable="d"
-          Title="ACDataStorage MainMenu" Height="600" Width="800" Icon="Images/accomp.jpg">
+          Title="ACDataStorage MainMenu" Height="600" Width="900" Icon="Images/accomp.jpg">
     <Grid>
         <TabControl 
   Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
@@ -77,6 +77,7 @@
                             <Separator />
                             <Button
       ToolTip="Удалить заказ"
+      Click="DeleteOrderButton"
       Content="{materialDesign:PackIcon Kind=ArchiveOffOutline}" />
                             <Separator />
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="ПОИСК" />
@@ -86,6 +87,34 @@
                             <Separator />
                         </ToolBar>
                     </ToolBarTray>
+                    <DataGrid local:DataGridTextSearch.SearchValue="{Binding ElementName=TexBoxSearch, Path=Text, UpdateSourceTrigger=PropertyChanged}"
+            CanUserAddRows="False" SelectionMode="Extended" Grid.Row="3" x:Name="DataGridOrders" AutoGenerateColumns="False" ItemsSource="{Binding}" Margin="20,0,20,20">
+                        <DataGrid.Resources>
+                            <local:SearchValueConverter x:Key="SearchValueConverter" />
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Setter Property="local:DataGridTextSearch.IsTextMatch">
+                                    <Setter.Value>
+                                        <MultiBinding Converter="{StaticResource SearchValueConverter}">
+                                            <Binding RelativeSource="{RelativeSource Self}" Path="Content.Text" />
+                                            <Binding RelativeSource="{RelativeSource Self}" Path="(local:DataGridTextSearch.SearchValue)" />
+                                        </MultiBinding>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="local:DataGridTextSearch.IsTextMatch" Value="True">
+                                        <Setter Property="Background" Value="LightSteelBlue" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="№" Binding="{Binding Path= Id}" Width="50" />
+                            <DataGridTextColumn Header="Номер счета" Binding="{Binding Path=AccauntNum}" Width="120" />
+                            <DataGridTextColumn Header="Клиент" Binding="{Binding Path=Customer}" Width="150"/>
+                            <DataGridTextColumn Header="Товар" Binding="{Binding Path=Products}" Width="310" />
+                            <DataGridTextColumn Header="Дата оформления" Binding="{Binding Path=DateOfOrder}" Width="150" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </StackPanel>
             </TabItem>
             <TabItem >

@@ -1,0 +1,46 @@
+﻿<Window x:Class="ACDataStorage.AddOrderMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ACDataStorage"
+        mc:Ignorable="d"
+        Title="AddOrderMenu" Height="220" Width="500" Icon="Images/accomp.jpg">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="8" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="8" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Номер счета"/>
+        <TextBlock Text="Клиент" Grid.Row="1" />
+        <TextBlock Text="Товар" Grid.Row="2" />
+        <TextBlock Text="Дата заказа" Grid.Row="3" />
+
+        <TextBox Text="{Binding AccauntNum}" Grid.Column="1" />
+        <TextBox Text="{Binding Customer}" Grid.Column="1" Grid.Row="1" />
+        <TextBox Text="{Binding Products}" Grid.Column="1" Grid.Row="2" />
+        <TextBox Text="{Binding DateOfOrder}" Grid.Column="1" Grid.Row="3" />
+
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="4" Grid.Column="1" Margin="5">
+            <Button IsDefault="True" VerticalAlignment="Center" Click="Accept_Click" MinWidth="60"  Style="{StaticResource MaterialDesignOutlinedLightButton}"
+  ToolTip="MaterialDesignOutlinedButton">OK</Button>
+            <Button IsCancel="True" VerticalAlignment="Center" MinWidth="60" Margin="20,0"  Style="{StaticResource MaterialDesignOutlinedLightButton}"
+  ToolTip="MaterialDesignOutlinedButton">Отмена</Button>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ACDataStorage.Models;
 
 
 namespace ACDataStorage
@@ -29,19 +30,51 @@ namespace ACDataStorage
             appDb.Orders.Load();
             DataGridOrders.DataContext = appDb.Orders.Local.ToBindingList();
         }
-        #region ORDERS
+        #region ORDERS CRUD
         private void AddOrderButton(object sender, RoutedEventArgs e)
         {
-
+            AddOrderMenu addOrderMenu = new AddOrderMenu(new Order());
+            if(addOrderMenu.ShowDialog()==true)
+            {
+                Order order = addOrderMenu.Order;
+                appDb.Orders.Add(order);
+                appDb.SaveChanges();
+            }
         }
 
         private void ChangeOrderButton(object sender, RoutedEventArgs e)
         {
-
+            if (DataGridOrders.SelectedItem == null) return;
+            Order order = DataGridOrders.SelectedItem as Order;
+            AddOrderMenu addOrderMenu = new AddOrderMenu(new Order
+            {
+                Id = order.Id,
+                AccauntNum = order.AccauntNum,
+                Customer = order.Customer,
+                Products = order.Products,
+                DateOfOrder = order.DateOfOrder
+            });
+            if (addOrderMenu.ShowDialog() == true)
+            {
+                order = appDb.Orders.Find(addOrderMenu.Order.Id);
+                if (order != null)
+                {
+                    order.AccauntNum = addOrderMenu.Order.AccauntNum;
+                    order.Customer = addOrderMenu.Order.Customer;
+                    order.Products = addOrderMenu.Order.Products;
+                    order.DateOfOrder = addOrderMenu.Order.DateOfOrder;
+                    appDb.Entry(order).State = EntityState.Modified;
+                    appDb.SaveChanges();
+                }
+            }
         }
 
         private void DeleteOrderButton(object sender, RoutedEventArgs e)
         {
+            if (DataGridOrders.SelectedItem == null) return;
+            Order order = DataGridOrders.SelectedItem as Order;
+            appDb.Orders.Remove(order);
+            appDb.SaveChanges();
 
         }
         #endregion ORDERS

@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace ACDataStorage.Models
 {
-    class Order : INotifyPropertyChanged 
+    public class Order : INotifyPropertyChanged 
     {
         
         private int accauntNum;

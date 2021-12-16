@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ACDataStorage"
         mc:Ignorable="d"
-          Title="ACDataStorage MainMenu" Height="600" Width="900" Icon="Images/accomp.jpg">
+          Title="ACDataStorage MainMenu" Height="600" Width="950" Icon="Images/accomp.jpg">
     <Grid>
         <TabControl 
   Style="{StaticResource MaterialDesignNavigatilRailTabControl}"

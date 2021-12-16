@@ -13,5 +13,6 @@ namespace ACDataStorage
         public AppDbContext() : base("DefaultConnection")
         { }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Client> Clients { get; set; }
     }
 }

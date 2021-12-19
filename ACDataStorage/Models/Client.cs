@@ -32,33 +32,34 @@ namespace ACDataStorage.Models
         }
         // Загружаем с ПК все данные по контактам в БД (имя компании из названия папки, контакты из фалов *.txt)
         public static void DownLoadCollection()
-        {
-
-            string stringForDownloading = ConfigurationManager.AppSettings["stringForDownLoadingClients"];
+        { 
+            string stringForDownloading = ConfigurationManager.AppSettings["stringForDownLoadingClients"];//папка, в которой хранятся все файлы, через  app.config
             DirectoryInfo directory = new DirectoryInfo(stringForDownloading);
-            FileInfo[] fileInfo = directory.GetFiles("*.txt", SearchOption.AllDirectories);
+            FileInfo[] fileInfo = directory.GetFiles("*.txt", SearchOption.AllDirectories);// все файлы *.txt
             AppDbContext appcon = new AppDbContext();
             foreach (var i in fileInfo)
             {
-                using (StreamReader stream = File.OpenText(i.FullName))
+                
+                using (StreamReader stream = File.OpenText(i.FullName)) //поток для чтения конкретного файла txt по адресу i.fullname
                 {
-                    string newcontact = null;
-                    //if (stream.ReadToEnd() != null)
-                    //{
-                        newcontact = stream.ReadToEnd();
+                   
+                    if (stream.ReadToEnd() != null) 
+                    {
+
+                        var text = File.ReadAllText(i.FullName, Encoding.GetEncoding(1251));// читаем txt применяя кодировку 1251. иначе не читается корректно.
+                        appcon.Clients.Add(new Client()
+                        {
+                            Name = i.DirectoryName.Substring((i.DirectoryName.LastIndexOf('\\')) + 1), //имя компании - название папки
+                            Contacts = text // контакты - текст в файле txt
+                        });
+                    }
+                    else
                         appcon.Clients.Add(new Client()
                         {
                             Name = i.DirectoryName.Substring((i.DirectoryName.LastIndexOf('\\')) + 1),
-                            Contacts = newcontact
+                            Contacts = "контактов нет"
                         });
-                    //}
-                    //else
-                    //    appcon.Clients.Add(new Client()
-                    //    {
-                    //        Name = i.DirectoryName.Substring((i.DirectoryName.LastIndexOf('\\')) + 1),
-                    //        Contacts = "контактов нет"
-                    //    });
-                    
+
                 }
             }
             appcon.SaveChanges();

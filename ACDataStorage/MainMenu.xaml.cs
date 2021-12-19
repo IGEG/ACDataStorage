@@ -101,6 +101,11 @@ namespace ACDataStorage
             await Task.Run(() => { Parallel.Invoke(() => Client.DropTableClients()); });
             
         }
+
+        private void DataGridClients_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = (e.Row.GetIndex()+1).ToString();
+        }
     }
     #region ORDERSDataGridTextSearch
     public static class DataGridTextSearch //честно-скоммуниженный код со stackowerflow

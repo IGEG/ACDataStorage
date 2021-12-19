@@ -16,7 +16,7 @@
   materialDesign:ShadowAssist.ShadowDepth="Depth0"
   materialDesign:ColorZoneAssist.Mode="Standard"
   SnapsToDevicePixels="True"
-  materialDesign:NavigationRailAssist.ShowSelectionBackground="True">
+ >
             <TabItem >
                 <TabItem.Header>
                     <StackPanel
@@ -34,12 +34,12 @@
                 </TabItem.Header>
                 <StackPanel>
                     
-                        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Text="ПОИСК" />
-                        <TextBox x:Name="TexBoxSearchClient" Width="300"  ToolTip="Поиск по таблице">
+                        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="ПОИСК" Margin="20,0" />
+                        <TextBox x:Name="TexBoxSearchClient" Width="300"  ToolTip="Поиск по таблице" HorizontalAlignment="Left" Margin="20,10">
                         </TextBox>
                     <ScrollViewer  VerticalScrollBarVisibility="Visible" Height="510">
-                        <DataGrid local:DataGridTextSearch.SearchValue="{Binding ElementName=TexBoxSearchClient, Path=Text, UpdateSourceTrigger=PropertyChanged}" Width="700"
-             IsReadOnly="True"  Grid.Row="3" x:Name="DataGridClients" AutoGenerateColumns="False" ItemsSource="{Binding}" Margin="5,5,10,5">
+                        <DataGrid local:DataGridTextSearch.SearchValue="{Binding ElementName=TexBoxSearchClient, Path=Text, UpdateSourceTrigger=PropertyChanged}" Width="830"
+             IsReadOnly="True"  Grid.Row="3" x:Name="DataGridClients" AutoGenerateColumns="False" ItemsSource="{Binding}" Margin="5,5,5,5" HorizontalAlignment="Left" LoadingRow="DataGridClients_LoadingRow" >
 
                             <DataGrid.Resources>
                                 <local:SearchValueConverter x:Key="SearchValueConverter" />
@@ -60,8 +60,8 @@
                                 </Style>
                             </DataGrid.Resources>
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="№" Binding="{Binding Path= Id}" Width="50" />
-                                <DataGridTextColumn Header="Клиент" Binding="{Binding Path=Name}" Width="150" />
+                                
+                                <DataGridTextColumn Header="Клиент" Binding="{Binding Path=Name}" Width="200" />
                                 <DataGridTextColumn Header="Контакты" Binding="{Binding Path=Contacts}" Width="450"/>
                             </DataGrid.Columns>
 

@@ -47,6 +47,7 @@ namespace ACDataStorage.Models
                     {
 
                         var text = File.ReadAllText(i.FullName, Encoding.GetEncoding(1251));// читаем txt применяя кодировку 1251. иначе не читается корректно.
+                        if (appcon.Clients.Where(x => x.Name == text).Count() > 0) return; // проверка на дублирование
                         appcon.Clients.Add(new Client()
                         {
                             Name = i.DirectoryName.Substring((i.DirectoryName.LastIndexOf('\\')) + 1), //имя компании - название папки

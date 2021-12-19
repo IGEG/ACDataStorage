@@ -11,7 +11,6 @@
         <TabControl 
   Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
   BorderThickness="5"
-
   BorderBrush="Transparent"
   TabStripPlacement="Left"
   materialDesign:ShadowAssist.ShadowDepth="Depth0"
@@ -33,16 +32,42 @@
           HorizontalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
-                <TextBlock>
-      <Run
-        Text="tab 1 content. Default look and behaviors." />
-      <LineBreak />
-      <LineBreak />
-      <Run
-        FontStyle="Italic">
-      Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...
-    </Run>
-                </TextBlock>
+                <StackPanel>
+                    
+                        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Text="ПОИСК" />
+                        <TextBox x:Name="TexBoxSearchClient" Width="300"  ToolTip="Поиск по таблице">
+                        </TextBox>
+                    <ScrollViewer  VerticalScrollBarVisibility="Visible" Height="510">
+                        <DataGrid local:DataGridTextSearch.SearchValue="{Binding ElementName=TexBoxSearchClient, Path=Text, UpdateSourceTrigger=PropertyChanged}" Width="700"
+             IsReadOnly="True"  Grid.Row="3" x:Name="DataGridClients" AutoGenerateColumns="False" ItemsSource="{Binding}" Margin="5,5,10,5">
+
+                            <DataGrid.Resources>
+                                <local:SearchValueConverter x:Key="SearchValueConverter" />
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Setter Property="local:DataGridTextSearch.IsTextMatch">
+                                        <Setter.Value>
+                                            <MultiBinding Converter="{StaticResource SearchValueConverter}">
+                                                <Binding RelativeSource="{RelativeSource Self}" Path="Content.Text" />
+                                                <Binding RelativeSource="{RelativeSource Self}" Path="(local:DataGridTextSearch.SearchValue)" />
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="local:DataGridTextSearch.IsTextMatch" Value="True">
+                                            <Setter Property="Background" Value="LightSteelBlue" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.Resources>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="№" Binding="{Binding Path= Id}" Width="50" />
+                                <DataGridTextColumn Header="Клиент" Binding="{Binding Path=Name}" Width="150" />
+                                <DataGridTextColumn Header="Контакты" Binding="{Binding Path=Contacts}" Width="450"/>
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+                    </ScrollViewer>
+                </StackPanel> 
             </TabItem>
             <TabItem >
                 <TabItem.Header>
@@ -181,6 +206,11 @@
         Text="tab 4 content. Default look and behaviors." />
       <LineBreak />
       <LineBreak />
+                    <StackPanel>
+                    <Button Width="50" Height="100" Content="download" Click="DownLoadButton"/>
+                    <Button Width="50" Height="100" Content="очистить таблицу" Click="DropTableButton"/>
+                        <TextBox x:Name="TextBoxClient" Margin="10" Height="200" Width="400"/>
+                        </StackPanel>
                 </TextBlock>
             </TabItem>
         </TabControl>

@@ -25,10 +25,18 @@ namespace ACDataStorage
         AppDbContext appDb;
         public MainMenu()
         {
+
             InitializeComponent();
             appDb = new AppDbContext();
             appDb.Orders.Load();
+            appDb.Clients.Load();
             DataGridOrders.DataContext = appDb.Orders.Local.ToBindingList();
+            DataGridClients.DataContext = appDb.Clients.Local.ToBindingList();
+            this.Closing += MainWindow_Closing;
+        }
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            appDb.Dispose();
         }
         #region ORDERS CRUD
         private void AddOrderButton(object sender, RoutedEventArgs e)
@@ -78,6 +86,21 @@ namespace ACDataStorage
 
         }
         #endregion ORDERS
+
+ 
+
+        private  async void DownLoadButton(object sender, RoutedEventArgs e)
+        {
+
+            await Task.Run(() => { Parallel.Invoke(()=>Client.DownLoadCollection());});
+           
+        }
+
+        private async void DropTableButton(object sender, RoutedEventArgs e)
+        {
+            await Task.Run(() => { Parallel.Invoke(() => Client.DropTableClients()); });
+            
+        }
     }
     #region ORDERSDataGridTextSearch
     public static class DataGridTextSearch //честно-скоммуниженный код со stackowerflow

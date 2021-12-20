@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ACDataStorage"
         mc:Ignorable="d"
-        Title="AddOrderMenu" Height="220" Width="500" Icon="Images/accomp.jpg">
+        Title="AddOrderMenu" Height="280" Width="500" Icon="Images/accomp.jpg">
     <Window.Resources>
-        <Style TargetType="TextBlock">
-            <Setter Property="Margin" Value="8" />
-        </Style>
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="8" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="14"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -26,21 +28,22 @@
             <ColumnDefinition Width="100" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Номер счета"/>
-        <TextBlock Text="Клиент" Grid.Row="1" />
-        <TextBlock Text="Товар" Grid.Row="2" />
-        <TextBlock Text="Дата заказа" Grid.Row="3" />
+        <TextBlock Text="Номер счета" Grid.Row="0"/>
+        <TextBlock Text="Клиент" Grid.Row="1"  />
+        <TextBlock Text="Товар" Grid.Row="2"  />
+        <TextBlock Text="Дата заказа" Grid.Row="3"  />
 
-        <TextBox Text="{Binding AccauntNum}" Grid.Column="1" />
-        <TextBox Text="{Binding Customer}" Grid.Column="1" Grid.Row="1" />
-        <TextBox Text="{Binding Products}" Grid.Column="1" Grid.Row="2" />
-        <TextBox Text="{Binding DateOfOrder}" Grid.Column="1" Grid.Row="3" />
+        <TextBox Text="{Binding AccauntNum}" Grid.Column="1" Grid.Row="0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="350" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Text="{Binding Customer}" Grid.Column="1" Grid.Row="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="350" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Text="{Binding Products}" Grid.Column="1" Grid.Row="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="350" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox Text="{Binding DateOfOrder}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Grid.Column="1" Grid.Row="3" Width="350" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    
 
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="4" Grid.Column="1" Margin="5">
-            <Button IsDefault="True" VerticalAlignment="Center" Click="Accept_Click" MinWidth="60"  Style="{StaticResource MaterialDesignOutlinedLightButton}"
-  ToolTip="MaterialDesignOutlinedButton">OK</Button>
-            <Button IsCancel="True" VerticalAlignment="Center" MinWidth="60" Margin="20,0"  Style="{StaticResource MaterialDesignOutlinedLightButton}"
-  ToolTip="MaterialDesignOutlinedButton">Отмена</Button>
+            <Button IsDefault="True" VerticalAlignment="Center" Click="Accept_Click" Style="{StaticResource MaterialDesignOutlinedLightButton}"
+  ToolTip="ОК">OK</Button>
+            <Button IsCancel="True" VerticalAlignment="Center" Margin="20,0" Style="{StaticResource MaterialDesignOutlinedLightButton}"
+  ToolTip="ОТМЕНА">Отмена</Button>
         </StackPanel>
     </Grid>
 </Window>

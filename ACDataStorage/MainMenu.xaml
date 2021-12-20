@@ -33,38 +33,16 @@
                     </StackPanel>
                 </TabItem.Header>
                 <StackPanel>
-                    
-                        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="ПОИСК" Margin="20,0" />
-                        <TextBox x:Name="TexBoxSearchClient" Width="300"  ToolTip="Поиск по таблице" HorizontalAlignment="Left" Margin="20,10">
-                        </TextBox>
+                    <WrapPanel>
+                        <TextBox x:Name="TextBoxSearchClient" Width="300"  ToolTip="Поиск по таблице" HorizontalAlignment="Left" Margin="20,10"/>
+                        <Button Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="ПОИСК" Width="200" VerticalAlignment="Center" Click="FindClientsButton"/>
+                    </WrapPanel>
                     <ScrollViewer  VerticalScrollBarVisibility="Visible" Height="510">
-                        <DataGrid local:DataGridTextSearch.SearchValue="{Binding ElementName=TexBoxSearchClient, Path=Text, UpdateSourceTrigger=PropertyChanged}" Width="830"
-             IsReadOnly="True"  Grid.Row="3" x:Name="DataGridClients" AutoGenerateColumns="False" ItemsSource="{Binding}" Margin="5,5,5,5" HorizontalAlignment="Left" LoadingRow="DataGridClients_LoadingRow" >
-
-                            <DataGrid.Resources>
-                                <local:SearchValueConverter x:Key="SearchValueConverter" />
-                                <Style TargetType="{x:Type DataGridCell}">
-                                    <Setter Property="local:DataGridTextSearch.IsTextMatch">
-                                        <Setter.Value>
-                                            <MultiBinding Converter="{StaticResource SearchValueConverter}">
-                                                <Binding RelativeSource="{RelativeSource Self}" Path="Content.Text" />
-                                                <Binding RelativeSource="{RelativeSource Self}" Path="(local:DataGridTextSearch.SearchValue)" />
-                                            </MultiBinding>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Style.Triggers>
-                                        <Trigger Property="local:DataGridTextSearch.IsTextMatch" Value="True">
-                                            <Setter Property="Background" Value="LightSteelBlue" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </DataGrid.Resources>
+                        <DataGrid  Width="830" IsReadOnly="True"  Grid.Row="3" x:Name="DataGridClients" AutoGenerateColumns="False" ItemsSource="{Binding}" Margin="5,5,5,5" HorizontalAlignment="Left" >
                             <DataGrid.Columns>
-                                
                                 <DataGridTextColumn Header="Клиент" Binding="{Binding Path=Name}" Width="200" />
                                 <DataGridTextColumn Header="Контакты" Binding="{Binding Path=Contacts}" Width="450"/>
                             </DataGrid.Columns>
-
                         </DataGrid>
                     </ScrollViewer>
                 </StackPanel> 

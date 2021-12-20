@@ -38,6 +38,7 @@ namespace ACDataStorage
         {
             appDb.Dispose();
         }
+
         #region ORDERS CRUD
         private void AddOrderButton(object sender, RoutedEventArgs e)
         {
@@ -102,13 +103,22 @@ namespace ACDataStorage
             
         }
 
-        private void DataGridClients_LoadingRow(object sender, DataGridRowEventArgs e)
+        private void FindClientsButton(object sender, RoutedEventArgs e)
         {
-            e.Row.Header = (e.Row.GetIndex()+1).ToString();
+            if (TextBoxSearchClient.Text == null) return; //проверяем, что введен текст
+            string findTextBoxClient = TextBoxSearchClient.Text;
+            AppDbContext db = new AppDbContext();
+            // находим в столбцах Name и Contacts совпадения с введенным текстом
+            List < Client > ClientToFindList = db.Clients.Where(x => x.Name.Contains(findTextBoxClient) || x.Contacts.Contains(findTextBoxClient)).ToList<Client>();
+            if (ClientToFindList.Count() == 0)
+            { MessageBox.Show("КЛИЕНТ НЕ НАЙДЕН"); return; }// если нет совпадений-выходим
+            FindClientsWindow findClient = new FindClientsWindow(ClientToFindList);// передаем в конструктор класса коллекцию нужных нам объектов CLients
+            findClient.ShowDialog(); // визуализиурем в listbox
+
         }
     }
     #region ORDERSDataGridTextSearch
-    public static class DataGridTextSearch //честно-скоммуниженный код со stackowerflow
+    public static class DataGridTextSearch //честно-скоммуниженный код со stackowerflow для выделения требуемых строк в datagrid
     {
         // Using a DependencyProperty as the backing store for SearchValue.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SearchValueProperty =

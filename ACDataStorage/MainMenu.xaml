@@ -45,7 +45,7 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </ScrollViewer>
-                </StackPanel> 
+                </StackPanel>
             </TabItem>
             <TabItem >
                 <TabItem.Header>
@@ -179,19 +179,28 @@
           HorizontalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
-                <TextBlock>
-      <Run
-        Text="tab 4 content. Default look and behaviors." />
-      <LineBreak />
-      <LineBreak />
-                    <StackPanel>
-                    <Button Width="50" Height="100" Content="download" Click="DownLoadButton"/>
-                    <Button Width="50" Height="100" Content="очистить таблицу" Click="DropTableButton"/>
-                        <TextBox x:Name="TextBoxClient" Margin="10" Height="200" Width="400"/>
-                        </StackPanel>
-                </TextBlock>
+                 <StackPanel>
+                    <WrapPanel Margin="0,20,0,20">
+                        <Label Content="Настройка пункта клиенты" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,0"/>
+                        <Button Width="200" Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="Загрузка данных с ПК " Margin="20,0,20,0" Click="DownLoadButton"/>
+                        <Button Width="200" Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="Удалить данные из БД" Click="DropTableButton"/>
+                    </WrapPanel>
+                    <Separator/>
+                    <WrapPanel Margin="0,20,0,20">
+                        <Label Content="Настройка пункта заказы" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,0"/>
+                    </WrapPanel>
+                    <Separator/>
+                    <WrapPanel Margin="0,20,0,20">
+                        <Label Content="Настройка пункта резерв" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,0"/>
+                    </WrapPanel>
+                    <Separator/>
+                    <WrapPanel Margin="0,20,0,20">
+                        <Label Content="Настройка пункта документы" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,0"/>
+                    </WrapPanel>
+                    <Separator/>
+                </StackPanel>
+
             </TabItem>
         </TabControl>
-
     </Grid>
 </Window>

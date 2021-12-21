@@ -17,9 +17,7 @@ using ACDataStorage.Models;
 
 namespace ACDataStorage
 {
-    /// <summary>
-    /// Interaction logic for MainMenu.xaml
-    /// </summary>
+
     public partial class MainMenu : Window
     {
         AppDbContext appDb;
@@ -30,9 +28,13 @@ namespace ACDataStorage
             appDb = new AppDbContext();
             appDb.Orders.Load();
             appDb.Clients.Load();
+            appDb.Reserves.Load();
             DataGridOrders.DataContext = appDb.Orders.Local.ToBindingList();
             DataGridClients.DataContext = appDb.Clients.Local.ToBindingList();
+            DataGridReserve.DataContext = appDb.Reserves.Local.ToBindingList();
+
             this.Closing += MainWindow_Closing;
+
         }
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -43,7 +45,7 @@ namespace ACDataStorage
         private void AddOrderButton(object sender, RoutedEventArgs e)
         {
             AddOrderMenu addOrderMenu = new AddOrderMenu(new Order());
-            if(addOrderMenu.ShowDialog()==true)
+            if (addOrderMenu.ShowDialog() == true)
             {
                 Order order = addOrderMenu.Order;
                 appDb.Orders.Add(order);
@@ -88,36 +90,92 @@ namespace ACDataStorage
         }
         #endregion ORDERS
 
- 
-
-        private  async void DownLoadButton(object sender, RoutedEventArgs e)
-        {
-
-            await Task.Run(() => { Parallel.Invoke(()=>Client.DownLoadCollection());});
-           
-        }
-
-        private async void DropTableButton(object sender, RoutedEventArgs e)
-        {
-            await Task.Run(() => { Parallel.Invoke(() => Client.DropTableClients()); });
-            
-        }
-
+        #region CLIENTS FILTERS
         private void FindClientsButton(object sender, RoutedEventArgs e)
         {
             if (TextBoxSearchClient.Text == null) return; //проверяем, что введен текст
             string findTextBoxClient = TextBoxSearchClient.Text;
             AppDbContext db = new AppDbContext();
             // находим в столбцах Name и Contacts совпадения с введенным текстом
-            List < Client > ClientToFindList = db.Clients.Where(x => x.Name.Contains(findTextBoxClient) || x.Contacts.Contains(findTextBoxClient)).ToList<Client>();
+            List<Client> ClientToFindList = db.Clients.Where(x => x.Name.Contains(findTextBoxClient) || x.Contacts.Contains(findTextBoxClient)).ToList<Client>();
             if (ClientToFindList.Count() == 0)
             { MessageBox.Show("КЛИЕНТ НЕ НАЙДЕН"); return; }// если нет совпадений-выходим
             FindClientsWindow findClient = new FindClientsWindow(ClientToFindList);// передаем в конструктор класса коллекцию нужных нам объектов CLients
             findClient.ShowDialog(); // визуализиурем в listbox
 
         }
+        #endregion
+
+        #region CLIENTS CRUD
+        private void AddReservButton(object sender, RoutedEventArgs e)
+        {
+            AddReserveMenu addReserveMenu = new AddReserveMenu(new Reserve());
+            if (addReserveMenu.ShowDialog() == true)
+            {
+                Reserve reserve = addReserveMenu.Reserve;
+                appDb.Reserves.Add(reserve);
+                appDb.SaveChanges();
+            }
+        }
+
+        private void ChangeReserveButton(object sender, RoutedEventArgs e)
+        {
+            {
+                if (DataGridReserve.SelectedItem == null) return;
+                Reserve reserve = DataGridReserve.SelectedItem as Reserve;
+                AddReserveMenu addReserveMenu = new AddReserveMenu(new Reserve
+                {
+                    ReserveId = reserve.ReserveId,
+                    AccauntName = reserve.AccauntName,
+                    Client = reserve.Client,
+                    Product = reserve.Product,
+                    DateOfReserve = reserve.DateOfReserve
+                });
+                if (addReserveMenu.ShowDialog() == true)
+                {
+                    reserve = appDb.Reserves.Find(addReserveMenu.Reserve.ReserveId);
+                    if (reserve != null)
+                    {
+                        reserve.AccauntName = addReserveMenu.Reserve.AccauntName;
+                        reserve.Client = addReserveMenu.Reserve.Client;
+                        reserve.Product = addReserveMenu.Reserve.Product;
+                        reserve.DateOfReserve = addReserveMenu.Reserve.DateOfReserve;
+                        appDb.Entry(reserve).State = EntityState.Modified;
+                        appDb.SaveChanges();
+                    }
+                }
+            }
+
+        }
+
+        private void DeleteReserveButton(object sender, RoutedEventArgs e)
+        {
+            if (DataGridReserve.SelectedItem == null) return;
+            Reserve reserve = DataGridReserve.SelectedItem as Reserve;
+            appDb.Reserves.Remove(reserve);
+            appDb.SaveChanges();
+
+        }
+
+        #endregion
+
+        #region DownLoad data from folders on PC to Clients table in ACDataStorsgeDB
+
+        private async void DownLoadButton(object sender, RoutedEventArgs e)
+        {
+
+            await Task.Run(() => { Parallel.Invoke(() => Client.DownLoadCollection()); });
+
+        }
+
+        private async void DropTableButton(object sender, RoutedEventArgs e)
+        {
+            await Task.Run(() => { Parallel.Invoke(() => Client.DropTableClients()); });
+
+        }
+        #endregion
+
     }
-    #region ORDERSDataGridTextSearch
     public static class DataGridTextSearch //честно-скоммуниженный код со stackowerflow для выделения требуемых строк в datagrid
     {
         // Using a DependencyProperty as the backing store for SearchValue.  This enables animation, styling, binding, etc...
@@ -169,5 +227,7 @@ namespace ACDataStorage
             return null;
         }
     }
-    #endregion DataGridTextSearch
 }
+
+        
+

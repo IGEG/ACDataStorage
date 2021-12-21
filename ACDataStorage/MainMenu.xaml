@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ACDataStorage"
         mc:Ignorable="d"
-          Title="ACDataStorage MainMenu" Height="600" Width="950" Icon="Images/accomp.jpg">
+       Title="ACDataStorage MainMenu" Height="600" Width="950" Icon="Images/accomp.jpg">
     <Grid>
         <TabControl 
   Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
@@ -37,7 +37,7 @@
                         <TextBox x:Name="TextBoxSearchClient" Width="300"  ToolTip="Поиск по таблице" HorizontalAlignment="Left" Margin="20,10"/>
                         <Button Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="ПОИСК" Width="200" VerticalAlignment="Center" Click="FindClientsButton"/>
                     </WrapPanel>
-                    <ScrollViewer  VerticalScrollBarVisibility="Visible" Height="510">
+                    <ScrollViewer  VerticalScrollBarVisibility="Visible" Height="510" >
                         <DataGrid  Width="830" IsReadOnly="True"  Grid.Row="3" x:Name="DataGridClients" AutoGenerateColumns="False" ItemsSource="{Binding}" Margin="5,5,5,5" HorizontalAlignment="Left" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Клиент" Binding="{Binding Path=Name}" Width="200" />
@@ -105,13 +105,13 @@
                                 </Setter>
                                 <Style.Triggers>
                                     <Trigger Property="local:DataGridTextSearch.IsTextMatch" Value="True">
-                                        <Setter Property="Background" Value="LightSteelBlue" />
+                                        <Setter Property="Background" Value="Orange" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="№" Binding="{Binding Path= Id}" Width="50" />
+
                             <DataGridTextColumn Header="Номер счета" Binding="{Binding Path=AccauntNum}" Width="120" />
                             <DataGridTextColumn Header="Клиент" Binding="{Binding Path=Customer}" Width="150"/>
                             <DataGridTextColumn Header="Товар" Binding="{Binding Path=Products}" Width="310" />
@@ -135,12 +135,39 @@
           HorizontalAlignment="Stretch" />
                     </StackPanel>
                 </TabItem.Header>
-                <TextBlock>
-      <Run
-        Text="tab 3 content. Default look and behaviors." />
-      <LineBreak />
-      <LineBreak />
-                </TextBlock>
+                <StackPanel>
+                    <ToolBarTray>
+                        <ToolBar
+    Style="{DynamicResource MaterialDesignToolBar}"
+    ClipToBounds="False" HorizontalAlignment="Left" Width="700">
+                            <Separator />
+                            <Button
+      ToolTip="Добавить заказ"
+      Click="AddReservButton"
+      Content="{materialDesign:PackIcon Kind=PackageVariantClosedPlus}" />
+                            <Separator />
+                            <Button
+      ToolTip="Изменить заказ"
+      Click="ChangeReserveButton"
+      Content="{materialDesign:PackIcon Kind=ArchiveCogOutline}" />
+                            <Separator />
+                            <Button
+      ToolTip="Удалить заказ"
+      Click="DeleteReserveButton"
+      Content="{materialDesign:PackIcon Kind=ArchiveOffOutline}" />
+                            <Separator />
+                        </ToolBar>
+                    </ToolBarTray>
+                    <DataGrid IsReadOnly="True"  SelectionMode="Extended" Grid.Row="3"
+                              x:Name="DataGridReserve" AutoGenerateColumns="False" ItemsSource="{Binding}" Margin="20,0,20,20">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Номер счета" Binding="{Binding Path=AccauntName}" Width="120" />
+                            <DataGridTextColumn Header="Клиент" Binding="{Binding Path=Client}" Width="150"/>
+                            <DataGridTextColumn Header="Товар" Binding="{Binding Path=Product}" Width="310" />
+                            <DataGridTextColumn Header="Дата оформления" Binding="{Binding Path=DateOfReserve}" Width="150" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
             </TabItem>
             <TabItem >
                 <TabItem.Header>

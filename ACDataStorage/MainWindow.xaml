@@ -23,7 +23,7 @@
                      materialDesign:HintAssist.Hint="Password"
                      materialDesign:TextFieldAssist.HasClearButton="True"
                      materialDesign:HintAssist.HelperText="Enter your password" />
-            <Button x:Name="buttonEnter" Click="buttonEnter_Click"  
+            <Button x:Name="buttonEnter" Click="buttonEnter_Click" IsDefault="True" 
   Style="{StaticResource MaterialDesignOutlinedLightButton}"
   ToolTip="Вход"
   Content="ENTER"

@@ -16,6 +16,7 @@ namespace ACDataStorage
         { }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Reserve> Reserves { get; set; }
  
     }
 }

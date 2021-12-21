@@ -98,6 +98,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AddReserveMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FindClientsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -112,6 +116,9 @@
     </Page>
     <Compile Include="AddOrderMenu.xaml.cs">
       <DependentUpon>AddOrderMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddReserveMenu.xaml.cs">
+      <DependentUpon>AddReserveMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -132,6 +139,7 @@
   <ItemGroup>
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Reserve.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

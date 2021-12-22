@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ACDataStorage.Models;
+using System.Runtime.CompilerServices;
+using System.Configuration;
+using System.IO;
 
 
 namespace ACDataStorage
@@ -175,7 +178,60 @@ namespace ACDataStorage
         }
         #endregion
 
+   
+
+        private async void OpenDocumetnsButton(object sender, RoutedEventArgs e)
+        {
+            string stringDocuments = ConfigurationManager.AppSettings["stringDocumemts"];
+            await Task.Run(() => { Parallel.Invoke(() => MainMenu.OpenFolder(stringDocuments)); });
+        }
+
+        private async void OpenCargoButton_Click(object sender, RoutedEventArgs e)
+        {
+            string stringCargo = ConfigurationManager.AppSettings["stringCargo"];
+            await Task.Run(() => { Parallel.Invoke(() => MainMenu.OpenFolder(stringCargo)); });
+        }
+
+        private async void OpenManufacturingButton_Click(object sender, RoutedEventArgs e)
+        {
+            string stringManufacturing = ConfigurationManager.AppSettings["stringManufacturing"];
+            await Task.Run(() => { Parallel.Invoke(() => MainMenu.OpenFolder(stringManufacturing)); });
+        }
+
+        private async void OpenFormecoButton_Click(object sender, RoutedEventArgs e)
+        {
+            string stringFormeco = ConfigurationManager.AppSettings["stringFormeco"];
+            await Task.Run(() => { Parallel.Invoke(() => MainMenu.OpenFolder(stringFormeco)); });
+        }
+
+        private async void OpenCollectionButton_Click(object sender, RoutedEventArgs e)
+        {
+            string stringCollection = ConfigurationManager.AppSettings["stringCollection"];
+            await Task.Run(() => { Parallel.Invoke(() => MainMenu.OpenFolder(stringCollection)); });
+
+        }
+
+        private async void OpenLetterButton_Click(object sender, RoutedEventArgs e)
+        {
+            string stringLetter = ConfigurationManager.AppSettings["stringLetter"];
+            await Task.Run(() => { Parallel.Invoke(() => MainMenu.OpenFolder(stringLetter)); });
+
+        }
+
+        public static void OpenFolder(string folder)
+        {
+            FileInfo fileInfo = new FileInfo(folder);
+            FileStream fileStream = fileInfo.Open(FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+            fileStream.Close();
+ 
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
+
     public static class DataGridTextSearch //честно-скоммуниженный код со stackowerflow для выделения требуемых строк в datagrid
     {
         // Using a DependencyProperty as the backing store for SearchValue.  This enables animation, styling, binding, etc...

@@ -15,7 +15,7 @@
   TabStripPlacement="Left"
   materialDesign:ShadowAssist.ShadowDepth="Depth0"
   materialDesign:ColorZoneAssist.Mode="Standard"
-  SnapsToDevicePixels="True"
+  SnapsToDevicePixels="True" SelectionChanged="TabControl_SelectionChanged"
  >
             <TabItem >
                 <TabItem.Header>
@@ -184,12 +184,34 @@
           HorizontalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
-                <TextBlock>
-      <Run
-        Text="tab 4 content. Default look and behaviors." />
-      <LineBreak />
-      <LineBreak />
-                </TextBlock>
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Content="ДОГОВОРА" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,10"/>
+                        <Label Grid.Column="0" Grid.Row="1" Content="ТРАНСПОРТ" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,10" />
+                        <Label Grid.Column="0" Grid.Row="2" Content="АВТОЗАВОДЫ" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,10" />
+                        <Label Grid.Column="0" Grid.Row="3" Content="FORMECO" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,10" />
+                        <Label Grid.Column="0" Grid.Row="4" Content="КОМПЛЕКТАЦИИ" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,10" />
+                        <Label Grid.Column="0" Grid.Row="5" Content="ПИСЬМА" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,10" />
+                        <Button Grid.Column="1" Grid.Row="0" Width="200" x:Name="OpenDocumentsButton" Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="Открыть" HorizontalAlignment="Left" Click="OpenDocumetnsButton"/>
+                        <Button Grid.Column="1" Grid.Row="1" Width="200" x:Name="OpenCargoButton" Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="Открыть" HorizontalAlignment="Left" Click="OpenCargoButton_Click"/>
+                        <Button Grid.Column="1" Grid.Row="2" Width="200" x:Name="OpenManufacturingButton" Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="Открыть" HorizontalAlignment="Left" Click="OpenManufacturingButton_Click"/>
+                        <Button Grid.Column="1" Grid.Row="3" Width="200" x:Name="OpenFormecoButton" Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="Открыть" HorizontalAlignment="Left" Click="OpenFormecoButton_Click"/>
+                        <Button Grid.Column="1" Grid.Row="4" Width="200" x:Name="OpenCollectionButton" Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="Открыть" HorizontalAlignment="Left" Click="OpenCollectionButton_Click"/>
+                        <Button Grid.Column="1" Grid.Row="5" Width="200" x:Name="OpenLetterButton" Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="Открыть" HorizontalAlignment="Left" Click="OpenLetterButton_Click"/>
+                    </Grid>
+                </StackPanel>
             </TabItem>
             <TabItem >
                 <TabItem.Header>
@@ -206,7 +228,7 @@
           HorizontalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
-                 <StackPanel>
+                <StackPanel>
                     <WrapPanel Margin="0,20,0,20">
                         <Label Content="Настройка пункта клиенты" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,0"/>
                         <Button Width="200" Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="Загрузка данных с ПК " Margin="20,0,20,0" Click="DownLoadButton"/>

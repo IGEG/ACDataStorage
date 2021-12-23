@@ -16,7 +16,7 @@ using ACDataStorage.Models;
 using System.Runtime.CompilerServices;
 using System.Configuration;
 using System.IO;
-
+using System.Diagnostics;
 
 namespace ACDataStorage
 {
@@ -164,7 +164,7 @@ namespace ACDataStorage
 
         #region DownLoad data from folders on PC to Clients table in ACDataStorsgeDB
 
-        private async void DownLoadButton(object sender, RoutedEventArgs e)
+        private async void DownLoadButton(object sender, RoutedEventArgs e) // реализуем метод из класса CLient
         {
 
             await Task.Run(() => { Parallel.Invoke(() => Client.DownLoadCollection()); });
@@ -173,13 +173,13 @@ namespace ACDataStorage
 
         private async void DropTableButton(object sender, RoutedEventArgs e)
         {
-            await Task.Run(() => { Parallel.Invoke(() => Client.DropTableClients()); });
+            await Task.Run(() => { Parallel.Invoke(() => Client.DropTableClients()); }); //// реализуем метод из класса CLient
 
         }
         #endregion
 
-   
 
+        #region folder documents button event
         private async void OpenDocumetnsButton(object sender, RoutedEventArgs e)
         {
             string stringDocuments = ConfigurationManager.AppSettings["stringDocumemts"];
@@ -220,12 +220,10 @@ namespace ACDataStorage
 
         public static void OpenFolder(string folder)
         {
-            FileInfo fileInfo = new FileInfo(folder);
-            FileStream fileStream = fileInfo.Open(FileMode.Open, FileAccess.ReadWrite, FileShare.None);
-            fileStream.Close();
- 
+            Process.Start(folder,"explorer.exe");
+        
         }
-
+        #endregion
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 

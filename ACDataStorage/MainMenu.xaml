@@ -15,8 +15,7 @@
   TabStripPlacement="Left"
   materialDesign:ShadowAssist.ShadowDepth="Depth0"
   materialDesign:ColorZoneAssist.Mode="Standard"
-  SnapsToDevicePixels="True" SelectionChanged="TabControl_SelectionChanged"
- >
+  SnapsToDevicePixels="True" SelectionChanged="TabControl_SelectionChanged">
             <TabItem >
                 <TabItem.Header>
                     <StackPanel
@@ -111,12 +110,10 @@
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-
                             <DataGridTextColumn Header="Номер счета" Binding="{Binding Path=AccauntNum}" Width="120" />
                             <DataGridTextColumn Header="Клиент" Binding="{Binding Path=Customer}" Width="150"/>
                             <DataGridTextColumn Header="Товар" Binding="{Binding Path=Products}" Width="310" />
                             <DataGridTextColumn Header="Дата оформления" Binding="{Binding Path=DateOfOrder, StringFormat=\{0:dd.MM.yy\}}" Width="150" />
-
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
@@ -165,7 +162,7 @@
                             <DataGridTextColumn Header="Номер счета" Binding="{Binding Path=AccauntName}" Width="120" />
                             <DataGridTextColumn Header="Клиент" Binding="{Binding Path=Client}" Width="150"/>
                             <DataGridTextColumn Header="Товар" Binding="{Binding Path=Product}" Width="310" />
-                            <DataGridTextColumn Header="Дата оформления" Binding="{Binding Path=DateOfReserve}" Width="150" />
+                            <DataGridTextColumn Header="Дата оформления" Binding="{Binding Path=DateOfReserve}" Width="230" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
@@ -249,7 +246,6 @@
                     </WrapPanel>
                     <Separator/>
                 </StackPanel>
-
             </TabItem>
         </TabControl>
     </Grid>

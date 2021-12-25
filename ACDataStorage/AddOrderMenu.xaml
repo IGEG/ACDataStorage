@@ -34,17 +34,14 @@
         <TextBlock Text="Клиент" Grid.Row="1"  />
         <TextBlock Text="Товар" Grid.Row="2"  />
         <TextBlock Text="Дата заказа" Grid.Row="3" />
-
         <TextBox Text="{Binding AccauntNum}" Grid.Column="1" Grid.Row="0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="350" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <TextBox Text="{Binding Customer}" Grid.Column="1" Grid.Row="1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="350" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <TextBox Text="{Binding Products}" Grid.Column="1" Grid.Row="2" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="350" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <DatePicker Name="Datepiker" SelectedDate="{Binding DateOfOrder}" Text="{Binding textdate, StringFormat=\{0:dd.MM.yy\}}"  Grid.Column="1" Grid.Row="3"  Width="350" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        
-
+        <DatePicker Name="Datepiker" SelectedDate="{Binding DateOfOrder}" Text="{Binding Textdate, StringFormat=\{0:dd.MM.yy\}}"  Grid.Column="1" Grid.Row="3"  Width="350" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="4" Grid.Column="1" Margin="5">
-            <Button IsDefault="True" VerticalAlignment="Center" Click="Accept_Click" Style="{StaticResource MaterialDesignOutlinedLightButton}"
+        <Button IsDefault="True" VerticalAlignment="Center" Click="Accept_Click" Style="{StaticResource MaterialDesignOutlinedLightButton}"
   ToolTip="ОК">OK</Button>
-            <Button IsCancel="True" VerticalAlignment="Center" Margin="20,0" Style="{StaticResource MaterialDesignOutlinedLightButton}"
+          <Button IsCancel="True" VerticalAlignment="Center" Margin="20,0" Style="{StaticResource MaterialDesignOutlinedLightButton}"
   ToolTip="ОТМЕНА">Отмена</Button>
         </StackPanel>
     </Grid>

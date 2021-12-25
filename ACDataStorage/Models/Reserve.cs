@@ -10,13 +10,13 @@ namespace ACDataStorage.Models
 {
    public class Reserve : INotifyPropertyChanged
     {
-        private string accauntName;
+        private int accauntName;
         private string client;
         private string product;
         private string dateOfReserve;
 
         public int ReserveId { get; set; }
-        public string AccauntName { get => accauntName; set { accauntName = value; OnPropertyChanged(nameof(AccauntName)); } }
+        public int AccauntName { get => accauntName; set { accauntName = value; OnPropertyChanged(nameof(AccauntName)); } }
         public string Client { get => client; set { client = value; OnPropertyChanged(nameof(Client)); } }
         public string Product { get => product; set { product = value; OnPropertyChanged(nameof(Product)); } }
         public string DateOfReserve { get => dateOfReserve; set { dateOfReserve = value; OnPropertyChanged(nameof(DateOfReserve)); } }

@@ -80,6 +80,7 @@ namespace ACDataStorage.Models
             AppDbContext appcon = new AppDbContext();
             appcon.Clients.RemoveRange(appcon.Clients);
             appcon.SaveChanges();
+            MessageBox.Show($"данные удалены! Перезагрузите приложение для отображения изменений!");
         }
     }
 }

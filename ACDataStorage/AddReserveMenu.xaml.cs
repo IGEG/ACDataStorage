@@ -15,15 +15,14 @@ using ACDataStorage.Models;
 
 namespace ACDataStorage
 {
-    /// <summary>
-    /// Логика взаимодействия для AddReserveMenu.xaml
-    /// </summary>
+
     public partial class AddReserveMenu : Window
     {
        public Reserve Reserve { get; private set; }
-        
-        public AddReserveMenu(Reserve res)
+       public string Textdate { get; private set; }
+       public AddReserveMenu(Reserve res)
         {
+            Textdate = DateTime.Now.ToString();
             InitializeComponent();
             Reserve = res;
             this.DataContext = Reserve;

@@ -62,7 +62,7 @@ namespace ACDataStorage
                     }
 
                 }
-                else MessageBox.Show("Введите пароль2"); // выводим ошибку    
+                else MessageBox.Show("Введите пароль"); // выводим ошибку    
             }
             else MessageBox.Show("Введите логин"); // выводим ошибку 
         }

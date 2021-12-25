@@ -15,16 +15,20 @@ using ACDataStorage.Models;
 
 namespace ACDataStorage
 {
-    
+
     public partial class AddOrderMenu : Window
     {
         public Order Order { get; private set; }
+        public string Textdate { get; private set; }
+     
 
         public AddOrderMenu(Order o)
         {
+            Textdate= DateTime.Now.ToString();
             InitializeComponent();
             Order = o;
             this.DataContext = Order;
+
         }
 
         private void Accept_Click(object sender, RoutedEventArgs e)

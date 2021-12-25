@@ -72,6 +72,7 @@ namespace ACDataStorage.Models
                 }
             }
             appcon.SaveChanges();
+            MessageBox.Show($"данные загружены! Перезагрузите приложение для отображения изменений!");
         }
         //удаляем все данные из БД Клиентов
         public static void DropTableClients()
